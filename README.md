@@ -8,6 +8,7 @@ Re-write the whole twetter project code from scratch
 ### About how-to
 
 	1. Rails new a project named Twetter
+	https://github.com/limingth/myRoR/blob/master/1-build-project-wikiful.md
 
 	2. Style Twetter using bootstrap
 	https://github.com/limingth/myRoR/blob/master/4-style-wikiful-with-twitter-bootstrap.md

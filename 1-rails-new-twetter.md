@@ -1,7 +1,9 @@
 
 # Rails new a project named Twetter
 
-## rails new Twetter
+## Set up a new project
+
+### rails new Twetter
 	limingth@gmail ~/Github/myTwetter$ rails new Twetter
 	      create  
 	      create  README.rdoc
@@ -137,7 +139,7 @@
 	limingth@gmail ~/Github/myTwetter/Twetter$ vi Gemfile
 	limingth@gmail ~/Github/myTwetter/Twetter$ 
 
-## bundle install
+### bundle install
 	limingth@gmail ~/Github/myTwetter/Twetter$ bundle install
 	Using rake (10.1.0) 
 	Using i18n (0.6.9) 
@@ -187,3 +189,44 @@
 	Use `bundle show [gemname]` to see where a bundled gem is installed.
 	limingth@gmail ~/Github/myTwetter/Twetter$ 
 
+## Set up the welcome page
+
+### change root route
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi config/routes.rb 
+	  1 Twetter::Application.routes.draw do
+	  2   # The priority is based upon order of creation: first created -> highest priority.
+	  3   # See how all your routes lay out with "rake routes".
+	  4 
+	  5   # You can have the root of your site routed with "root"
+	  6   root 'welcome#index'
+
+### rails generate controller welcome index
+	limingth@gmail ~/Github/myTwetter/Twetter$ rails generate controller welcome index
+	      create  app/controllers/welcome_controller.rb
+	       route  get "welcome/index"
+	      invoke  erb
+	      create    app/views/welcome
+	      create    app/views/welcome/index.html.erb
+	      invoke  test_unit
+	      create    test/controllers/welcome_controller_test.rb
+	      invoke  helper
+	      create    app/helpers/welcome_helper.rb
+	      invoke    test_unit
+	      create      test/helpers/welcome_helper_test.rb
+	      invoke  assets
+	      invoke    coffee
+	      create      app/assets/javascripts/welcome.js.coffee
+	      invoke    scss
+	      create      app/assets/stylesheets/welcome.css.scss
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
+
+### Refresh web browser localhost:3000
+	Welcome#index
+
+	Find me in app/views/welcome/index.html.erb
+
+### git commit
+
+
+## Done! 
+see next step [Style Twetter using bootstrap](2-style-twetter-using-bootstrap.md)
