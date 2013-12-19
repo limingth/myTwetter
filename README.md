@@ -9,7 +9,7 @@ Re-write the whole twetter project code from scratch
 
 	1. Rails new a project named Twetter
 
-	2. Style Tweeter using bootstrap
+	2. Style Twetter using bootstrap
 	https://github.com/limingth/myRoR/blob/master/4-style-wikiful-with-twitter-bootstrap.md
 	a) add nav bar
 	b) add left sidebar
