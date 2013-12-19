@@ -226,7 +226,50 @@
 	Find me in app/views/welcome/index.html.erb
 
 ### git commit
-
+	limingth@gmail ~/Github/myTwetter/Twetter$ git status
+	# On branch master
+	# Your branch is ahead of 'origin/master' by 1 commit.
+	#   (use "git push" to publish your local commits)
+	#
+	# Changes not staged for commit:
+	#   (use "git add <file>..." to update what will be committed)
+	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#
+	#	modified:   ../1-rails-new-twetter.md
+	#	modified:   ../README.md
+	#	modified:   config/routes.rb
+	#
+	# Untracked files:
+	#   (use "git add <file>..." to include in what will be committed)
+	#
+	#	app/assets/javascripts/welcome.js.coffee
+	#	app/assets/stylesheets/welcome.css.scss
+	#	app/controllers/welcome_controller.rb
+	#	app/helpers/welcome_helper.rb
+	#	app/views/welcome/
+	#	test/controllers/welcome_controller_test.rb
+	#	test/helpers/welcome_helper_test.rb
+	no changes added to commit (use "git add" and/or "git commit -a")
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add .
+	limingth@gmail ~/Github/myTwetter/Twetter$ git commit -a -m "Rails new a project named Twetter"
+	[master 92fd109] Rails new a project named Twetter
+	 10 files changed, 75 insertions(+), 3 deletions(-)
+	 create mode 100644 Twetter/app/assets/javascripts/welcome.js.coffee
+	 create mode 100644 Twetter/app/assets/stylesheets/welcome.css.scss
+	 create mode 100644 Twetter/app/controllers/welcome_controller.rb
+	 create mode 100644 Twetter/app/helpers/welcome_helper.rb
+	 create mode 100644 Twetter/app/views/welcome/index.html.erb
+	 create mode 100644 Twetter/test/controllers/welcome_controller_test.rb
+	 create mode 100644 Twetter/test/helpers/welcome_helper_test.rb
+	limingth@gmail ~/Github/myTwetter/Twetter$ git push
+	Counting objects: 90, done.
+	Delta compression using up to 2 threads.
+	Compressing objects: 100% (75/75), done.
+	Writing objects: 100% (88/88), 18.40 KiB | 0 bytes/s, done.
+	Total 88 (delta 10), reused 0 (delta 0)
+	To git@github.com:limingth/myTwetter.git
+	   eb07e96..92fd109  master -> master
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
 
 ## Done! 
 see next step [Style Twetter using bootstrap](2-style-twetter-using-bootstrap.md)
