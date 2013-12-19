@@ -220,7 +220,7 @@
 	      create      app/assets/stylesheets/welcome.css.scss
 	limingth@gmail ~/Github/myTwetter/Twetter$ 
 
-### Refresh web browser localhost:3000
+### refresh web browser localhost:3000
 	Welcome#index
 
 	Find me in app/views/welcome/index.html.erb
