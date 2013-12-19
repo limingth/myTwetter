@@ -1,5 +1,5 @@
 
-# Use SQLite3 as database and Create the User Model
+# Use SQLite3 and Create the User Model
 
 ## Setup SQLite3 
 
@@ -150,7 +150,30 @@
 	2.0.0-p247 :010 > exit
 	limingth@gmail ~/Github/myTwetter/Twetter$ 
 
-## test db connection with controller
+### check db data in sqlite3 console
+	limingth@gmail ~/Github/myTwetter/Twetter$ sqlite3 db/development.sqlite3 
+	SQLite version 3.8.1 2013-10-17 12:57:35
+	Enter ".help" for instructions
+	Enter SQL statements terminated with a ";"
+	sqlite> .tables
+	schema_migrations  users            
+	sqlite> select * from users;
+	1|li ming|limingth|2013-12-19 21:06:03.982313|2013-12-19 21:06:03.982313
+	sqlite> .dump
+	PRAGMA foreign_keys=OFF;
+	BEGIN TRANSACTION;
+	CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
+	INSERT INTO "schema_migrations" VALUES('20131219205929');
+	CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "username" varchar(255), "created_at" datetime, "updated_at" datetime);
+	INSERT INTO "users" VALUES(1,'li ming','limingth','2013-12-19 21:06:03.982313','2013-12-19 21:06:03.982313');
+	DELETE FROM sqlite_sequence;
+	INSERT INTO "sqlite_sequence" VALUES('users',1);
+	CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version");
+	COMMIT;
+	sqlite> .exit
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
+
+## Test db connection with controller
 ### modify welcome controller
 	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/controllers/welcome_controller.rb 
 	  1 class WelcomeController < ApplicationController

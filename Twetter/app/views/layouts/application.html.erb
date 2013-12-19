@@ -26,12 +26,14 @@
 
     <div class="span3 sidebar">
        <div class="my-wiki-site">
-          <h4>Join us today!</h4>
-          <table height=300> reserved for sign-in/up </table>
+          <h3>Join us today!</h3>
+          <div class="clearfix top-space"></div>
+            <%= render :partial => 'sign_up' %>
        </div>
 
-       <div class="about">
+       <div class="row">
           <h4>About Twetter</h4>
+          <div class="clearfix top-space"></div>
           <p>Twetter is a project for twitter clone. </p>
           <p>You can make friends here, exchange your learned skills of Ruby on Rails.</p>
           <p>Any suggestions? Feel free to email me: <a href="mailto:limingth@gmail.com">limingth@gmail.com</a></p>
