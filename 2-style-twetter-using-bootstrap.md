@@ -137,3 +137,62 @@
 * see the navbar is comming out
 
 ![style-add-navbar](style-add-navbar.png)
+
+## Add sidebar layout below the navbar
+
+### add sidebar
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/layouts/application.html.erb 
+	<!DOCTYPE html>
+	<html>
+	<head>
+	  <title>Twetter</title>
+	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+
+	<div class="navbar navbar-fixed-top">
+	  <div class="navbar-inner">
+	    <div class="container">
+	      <%= link_to "Twetter", root_path, :class => "brand" %>
+	      <div style="float: right;">log in/out and sign up links will go here</div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="container">
+	  <div class="row">
+	    <div class="span9">
+	       <%= yield %>
+	       <img src="../assets/univ.jpg">
+	    </div>
+
+	    <div class="span3 sidebar">
+	       <div class="my-wiki-site">
+	          <h4>Join us today!</h4>
+	          <table height=300> reserved for sign-in/up </table>
+	       </div>
+
+	       <div class="about">
+	          <h4>About Twetter</h4>
+	          <p>Twetter is a project for twitter clone. </p>
+	          <p>You can make friends here, exchange your learned skills of Ruby on Rails.</p>
+	          <p>Any suggestions? Feel free to email me: <a href="mailto:limingth@gmail.com">limingth@gmail.com</a></p>
+	       </div>
+	    </div>
+	  </div>
+	</div>
+
+	</body>
+	</html>
+
+### add welcome message
+	<h1>Welcome</h1>
+	<p>Thanks to Mentor <a href="mailto:dan@bluefoc.us">Dan Matthews</a> for endless support</p>
+
+* see the sidebar is comming out
+
+![style-add-sidebar](style-add-sidebar.png)
+
+### git commit 
