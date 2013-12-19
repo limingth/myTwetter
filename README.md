@@ -8,19 +8,19 @@ Re-write the whole twetter project code from scratch
 ### About how-to
 
 	1. Rails new a project named Twetter
-	https://github.com/limingth/myRoR/blob/master/1-build-project-wikiful.md
+	<https://github.com/limingth/myRoR/blob/master/1-build-project-wikiful.md>
 
 	2. Style Twetter using bootstrap
-	https://github.com/limingth/myRoR/blob/master/4-style-wikiful-with-twitter-bootstrap.md
+	<https://github.com/limingth/myRoR/blob/master/4-style-wikiful-with-twitter-bootstrap.md>
 	a) add nav bar
 	b) add left sidebar
 	c) add right sidebar
 
-	3. Using PostgresSQL as database
-	https://github.com/limingth/myRoR/blob/master/2-work-with-psql.md
+	3. Use SQLite3 as database and Create the User Model
+	<https://github.com/limingth/myRoR/blob/master/2-work-with-psql.md>
 
-	4. Create the User Model and Sign Up Form
-	https://github.com/limingth/myRoR/blob/master/5-user-hub-project.md
+	4. Add attributes and Sign Up Form
+	<https://github.com/limingth/myRoR/blob/master/5-user-hub-project.md>
 
 	5. Add User Authentication feature
 	https://github.com/limingth/myRoR/blob/master/6-user-authentication.md

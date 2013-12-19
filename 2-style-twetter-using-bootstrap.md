@@ -188,6 +188,7 @@
 	</html>
 
 ### add welcome message
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/welcome/index.html.erb 
 	<h1>Welcome</h1>
 	<p>Thanks to Mentor <a href="mailto:dan@bluefoc.us">Dan Matthews</a> for endless support</p>
 
@@ -196,3 +197,6 @@
 ![style-add-sidebar](style-add-sidebar.png)
 
 ### git commit 
+
+## Done!
+see next step [Use SQLite3 as database and Create the User Model](3-setup-database-and-user-model.md)
