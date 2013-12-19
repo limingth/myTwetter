@@ -102,7 +102,7 @@
 	[2013-12-19 10:34:13] INFO  ruby 2.0.0 (2013-06-27) [x86_64-darwin12.4.0]
 	[2013-12-19 10:34:13] INFO  WEBrick::HTTPServer#start: pid=12195 port=3000
 
-### Refresh web browser localhost:3000
+### refresh web browser localhost:3000
 	Welcome#index
 
 	Find me in app/views/welcome/index.html.erb
@@ -110,4 +110,30 @@
 * see the style is changed
 ![style-twetter](style-twetter.png)
 
+## Add navbar layout to application
 
+### add navbar
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/layouts/application.html.erb 
+	 11 <div class="navbar navbar-fixed-top">
+	 12   <div class="navbar-inner">
+	 13     <div class="container">
+	 14       <%= link_to "Twetter", root_path, :class => "brand" %>
+	 15       <div style="float: right;">log in/out and sign up links will go here</div>
+	 16     </div>
+	 17   </div>
+	 18 </div>
+	 19 
+	 20 <%= yield %>
+	 21 
+
+### puts top-padding on the body element
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/assets/stylesheets/bootstrap_and_overrides.css.less 
+	  1 @import "twitter/bootstrap/bootstrap";
+	  2 body { padding-top: 60px; }
+	  3 @import "twitter/bootstrap/responsive";
+
+### refresh web browser localhost:3000
+
+* see the navbar is comming out
+
+![style-add-navbar](style-add-navbar.png)
