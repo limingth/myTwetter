@@ -1,12 +1,15 @@
 class SessionsController < ApplicationController
+  layout 'authed'
+
   def new
   end
 
   def create
+    @users = User.all
     user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])  
       session[:user_id] = user.id
-      redirect_to root_url, notice: "Thank you for signing in"
+      render 'new', notice: "thank youfor signing up"
     else
       if not user
         redirect_to root_url, notice: "Sorry, Signing in failed, user not exists"

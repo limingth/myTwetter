@@ -416,3 +416,57 @@
 ![log-out-success](log-out-success.png)
 
 ### git commit
+	limingth@gmail ~/Github/myTwetter/Twetter$ git status
+	# On branch master
+	# Changes not staged for commit:
+	#   (use "git add <file>..." to update what will be committed)
+	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#
+	#	modified:   ../5-add-user-authentication-feature.md
+	#	modified:   app/controllers/application_controller.rb
+	#	modified:   app/controllers/users_controller.rb
+	#	modified:   app/views/layouts/application.html.erb
+	#	modified:   config/routes.rb
+	#
+	# Untracked files:
+	#   (use "git add <file>..." to include in what will be committed)
+	#
+	#	app/assets/javascripts/sessions.js.coffee
+	#	app/assets/stylesheets/sessions.css.scss
+	#	app/controllers/sessions_controller.rb
+	#	app/helpers/sessions_helper.rb
+	#	app/views/sessions/
+	#	test/controllers/sessions_controller_test.rb
+	#	test/helpers/sessions_helper_test.rb
+	#	../log-in-form.png
+	#	../log-in-success.png
+	#	../log-out-success.png
+	no changes added to commit (use "git add" and/or "git commit -a")
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add ..
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add .
+	limingth@gmail ~/Github/myTwetter/Twetter$ git commit -a -m "Create Sessions and Add log in/out feature"
+	[master 9e1e1f1] Create Sessions and Add log in/out feature
+	 15 files changed, 195 insertions(+), 97 deletions(-)
+	 create mode 100644 Twetter/app/assets/javascripts/sessions.js.coffee
+	 create mode 100644 Twetter/app/assets/stylesheets/sessions.css.scss
+	 create mode 100644 Twetter/app/controllers/sessions_controller.rb
+	 create mode 100644 Twetter/app/helpers/sessions_helper.rb
+	 create mode 100644 Twetter/app/views/sessions/new.html.erb
+	 create mode 100644 Twetter/test/controllers/sessions_controller_test.rb
+	 create mode 100644 Twetter/test/helpers/sessions_helper_test.rb
+	 create mode 100644 log-in-form.png
+	 create mode 100644 log-in-success.png
+	 create mode 100644 log-out-success.png
+	limingth@gmail ~/Github/myTwetter/Twetter$ git push
+	Counting objects: 48, done.
+	Delta compression using up to 2 threads.
+	Compressing objects: 100% (27/27), done.
+	Writing objects: 100% (30/30), 2.37 MiB | 1.72 MiB/s, done.
+	Total 30 (delta 14), reused 0 (delta 0)
+	To git@github.com:limingth/myTwetter.git
+	   368bafc..9e1e1f1  master -> master
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
+
+## Done!
+see next step [Add Tweets data model](6-add-tweets-data-model.md)
+
