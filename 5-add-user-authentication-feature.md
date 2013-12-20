@@ -232,25 +232,61 @@
 ### refresh web browser localhost:3000
 
 * see the sign up form is changed
-
 ![signup-password-feature](signup-password-feature.png)
 
 * fill the 4 boxes and click Create User
-
 ![signup-success](signup-success.png)
 
+### git commit
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add --ignore-removal .
+	limingth@gmail ~/Github/myTwetter/Twetter$ git status
+	# On branch master
+	# Changes to be committed:
+	#   (use "git reset HEAD <file>..." to unstage)
+	#
+	#	new file:   ../.DS_Store
+	#	new file:   ../5-add-user-authentication-feature.md
+	#	modified:   Gemfile
+	#	modified:   Gemfile.lock
+	#	modified:   app/controllers/users_controller.rb
+	#	modified:   app/models/user.rb
+	#	modified:   app/views/layouts/application.html.erb
+	#	modified:   app/views/welcome/_sign_up.html.erb
+	#	modified:   app/views/welcome/index.html.erb
+	#	new file:   db/migrate/20131220195132_create_users.rb
+	#	modified:   db/schema.rb
+	#	modified:   test/controllers/users_controller_test.rb
+	#	modified:   test/fixtures/users.yml
+	#	new file:   ../signup-password-feature.png
+	#	new file:   ../signup-success.png
+	#
+	# Changes not staged for commit:
+	#   (use "git add/rm <file>..." to update what will be committed)
+	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#
+	#	deleted:    db/migrate/20131219205929_create_users.rb
+	#	deleted:    db/migrate/20131219230746_add_password_to_users.rb
+	#
+	limingth@gmail ~/Github/myTwetter/Twetter$ git commit -a -m "Improve password feature for sign up"
+	[master 368bafc] Improve password feature for sign up
+	 16 files changed, 437 insertions(+), 22 deletions(-)
+	 create mode 100644 .DS_Store
+	 create mode 100644 5-add-user-authentication-feature.md
+	 delete mode 100644 Twetter/db/migrate/20131219230746_add_password_to_users.rb
+	 rename Twetter/db/migrate/{20131219205929_create_users.rb => 20131220195132_create_users.rb} (84%)
+	 create mode 100644 signup-password-feature.png
+	 create mode 100644 signup-success.png
+	limingth@gmail ~/Github/myTwetter/Twetter$ git push
+	Counting objects: 52, done.
+	Delta compression using up to 2 threads.
+	Compressing objects: 100% (28/28), done.
+	Writing objects: 100% (29/29), 1.59 MiB | 0 bytes/s, done.
+	Total 29 (delta 13), reused 0 (delta 0)
+	To git@github.com:limingth/myTwetter.git
+	   ede1e55..368bafc  master -> master
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
 
-
-
-
-
-
-
-
-
-
-
-## Create Sessions
+## Create Sessions and Add log in/out feature 
 
 ### create a SessionsController with a new action
 	limingth@gmail ~/Github/myTwetter/Twetter$ rails g controller sessions new
@@ -270,6 +306,7 @@
 	      create      app/assets/javascripts/sessions.js.coffee
 	      invoke    scss
 	      create      app/assets/stylesheets/sessions.css.scss
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
 
 ### take a look at routes.rb
 	limingth@gmail ~/Github/myTwetter/Twetter$ vi config/routes.rb 
@@ -285,19 +322,17 @@
 	  3   resources :sessions
 	  4 
 
-## automatically sign in users after they sign up 
-
 ### alter the create action on UsersController
 	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/controllers/users_controller.rb 
-	 12   def create
-	 13     @user = User.new(user_params)
-	 14     if @user.save
-	 15       session[:user_id] = @user.id
-	 16       redirect_to root_url, notice: "Thank you for signing up"
-	 17     else
-	 18       render "new"
-	 19     end
-	 20   end
+	 13   def create
+	 14     @user = User.new(user_params)
+	 15     if @user.save
+	 16       session[:user_id] = @user.id
+	 17       redirect_to root_url, notice: "Thank you for signing up"
+	 18     else
+	 19       redirect_to root_url, notice: "Sorry, Signing up failed"
+	 20     end
+	 21   end
 
 ### set a @current_user instance variable in ApplicationController
 	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/controllers/application_controller.rb 
@@ -317,78 +352,67 @@
 
 ### add some conditional logic to the navbar
 	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/layouts/application.html.erb 
-	 16        <div class="session-controls" align=right>
-	 17           <% if current_user %>
-	 18              Logged in as <%= current_user.username %>.
-	 19              <div class="btn-group">
-	 20                <%= link_to "Log Out", session_path("current"), method: 'delete', :class => 'btn btn-primary btn-mini' %>
-	 21              </div>
-	 22            <% else %>
-	 23              <div class="btn-group">
-	 24                 <%= form_tag sessions_path do %>
-	 25                     <%= label_tag :username %>
-	 26                     <%= text_field_tag :username, params[:username] %>
-	 27                     <%= label_tag :password %>
-	 28                     <%= text_field_tag :password, params[:password], :type => "password" %>
-	 29                   <div class="actions"><%= submit_tag "Log In" %></div>
-	 30                 <% end %>
-	 31              </div>
-	 32            <% end %>
-	 33        </div> 
+	 16         <div class="span4">
+	 17           <% flash.each do |name, msg| %>
+	 18             <%= content_tag :div, msg, id: "flash_#{name}" %>
+	 19           <% end %>
+	 20         </div>
+	 21 
+	 22         <div class="session-controls" align=right>
+	 23            <% if current_user %>
+	 24               Logged in as <%= current_user.username %>.
+	 25               <div class="btn-group">
+	 26                 <%= link_to "Log Out", session_path("current"), method: 'delete', :class => 'btn btn-primary btn-mini' %>
+	 27               </div>
+	 28             <% else %>
+	 29               <div class="btn-group">
+	 30                  <%= form_tag sessions_path do %>
+	 31                      <%= text_field_tag :username, params[:username], :placeholder=>"Enter username" %> 
+	 32                      <%= text_field_tag :password, params[:password], :placeholder=>"Enter password", :type => "password" %>
+	 33                      <%= submit_tag "Log In" %>
+	 34                  <% end %>
+	 35               </div>
+	 36             <% end %>
+	 37         </div> 
 
-### create a destroy action on our sessions controller
+* refer to http://getbootstrap.com/css/#forms-inline
 
-
-
-### 
- 15 
- 16 # Use ActiveModel has_secure_password
- 17 gem 'bcrypt-ruby', '~> 3.1.2'
- 18 
-
-
-
-
-### change this behavior by using the layout method
+### create and destroy action on our sessions controller
 	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/controllers/sessions_controller.rb 
-	  1 class SessionsController < ApplicationController
-	  2   layout 'authed'
-	  3   
-	  4   def new
-	  5   end
-	  6 end
+	class SessionsController < ApplicationController
+	  def new 
+	  end 
 
-### 
+	  def create
+	    user = User.find_by_username(params[:username])
+	    if user && user.authenticate(params[:password])  
+	      session[:user_id] = user.id
+	      redirect_to root_url, notice: "Thank you for signing in" 
+	    else
+	      if not user
+	        redirect_to root_url, notice: "Sorry, Signing in failed, user not exists"
+	      else
+	        redirect_to root_url, notice: "Sorry, Signing in failed, password not correct"
+	      end 
+	    end 
+	  end 
 
-### change sign up form to a new session
-	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/welcome/_sign_up.html.erb 
-	<div class="row">
-	  <div class="col-md-4 col-md-offset-4 panel panel-default">
-	    <div class="pull-left">
-	      <h4>New to Twetter? <span>Sign up</span></h4>
-	    </div>
-	    <div class="clearfix"></div>
-	    <hr />
+	  def destroy
+	    session[:user_id] = nil 
+	    redirect_to root_url, notice: "Logged out"
+	  end 
 
-	    <div class="pull-left">
+	end
 
-	        <%= form_tag sessions_path do %>
-	          <div class="field">
-	            <%= label_tag :name%>
-	            <%= text_field_tag :name, params[:name]%> 
-	          </div>
-	          <div class="field">
-	            <%= label_tag :username%>
-	            <%= text_field_tag :username, params[:name]%> 
-	          </div>
-	          <div class="field">
-	            <%= label_tag :password %>
-	            <%= text_field_tag :password, params[:password], :type => "password" %>  
-	          </div>
-	          <div class="actions"><%= submit_tag "Log In" %></div>
-	        <% end %>
+### refresh web browser localhost:3000
 
-	    </div>
+* see the log in form is in a single line
+![log-in-form](log-in-form.png)
 
-	  </div>
-	</div>
+* fill the 2 boxes and click Log in
+![log-in-success](log-in-success.png)
+
+* click Log out
+![log-out-success](log-out-success.png)
+
+### git commit

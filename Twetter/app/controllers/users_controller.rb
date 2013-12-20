@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       redirect_to root_url, notice: "Thank you for signing up"
     else
       redirect_to root_url, notice: "Sorry, Signing up failed"

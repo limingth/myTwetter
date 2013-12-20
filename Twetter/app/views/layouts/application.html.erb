@@ -13,13 +13,29 @@
     <div class="container">
       <%= link_to "Twetter", root_path, :class => "brand" %>
 
-          <div class="span4">
-            <% flash.each do |name, msg| %>
-              <%= content_tag :div, msg, id: "flash_#{name}" %>
-            <% end %>
-          </div>
+        <div class="span4">
+          <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, id: "flash_#{name}" %>
+          <% end %>
+        </div>
 
-      <div style="float: right;">log in/out and sign up links will go here</div>
+	<div class="session-controls" align=right>
+	   <% if current_user %>
+	      Logged in as <%= current_user.username %>.
+	      <div class="btn-group">
+		<%= link_to "Log Out", session_path("current"), method: 'delete', :class => 'btn btn-primary btn-mini' %>
+	      </div>
+	    <% else %>
+	      <div class="btn-group">
+		 <%= form_tag sessions_path do %>
+		     <%= text_field_tag :username, params[:username], :placeholder=>"Enter username" %> 
+		     <%= text_field_tag :password, params[:password], :placeholder=>"Enter password", :type => "password" %>
+		     <%= submit_tag "Log In" %>
+		 <% end %>
+	      </div>
+	    <% end %>
+	</div> 
+
     </div>
   </div>
 </div>
