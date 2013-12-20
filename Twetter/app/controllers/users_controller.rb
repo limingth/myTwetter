@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+  layout 'index'
 
   def index
+    @users = User.all
     @user = User.new
-    @users = User.order(updated_at: :desc)
   end
 
   def new
@@ -14,13 +15,13 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to root_url, notice: "Thank you for signing up"
     else
-      render "new"
+      redirect_to root_url, notice: "Sorry, Signing up failed"
     end
   end
 
   private 
     def user_params
-      params.require(:user).permit(:name, :username, :password)
+      params.require(:user).permit(:name, :username, :password, :password_confirmation)
     end
 
 end

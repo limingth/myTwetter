@@ -1,5 +1,10 @@
 <h1>Welcome</h1>
-<h4>Our learning group has <%= @users.count %> members now! (Last in: <%= @users.first.name %>)</h4>
+<% if @users.count >= 1 %>
+  <h4>Our learning group has <%= @users.count %> members now! (Last in: <%= @users.first.name %>)</h4>
+<% else %>
+  <h4>Our learning group has <%= @users.count %> members now! </h4>
+<% end %>
+
 <p>Thanks to Mentor <a href="mailto:dan@bluefoc.us">Dan Matthews</a> for endless support</p>
 
 <img src="../assets/univ.jpg">

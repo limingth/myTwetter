@@ -12,6 +12,13 @@
   <div class="navbar-inner">
     <div class="container">
       <%= link_to "Twetter", root_path, :class => "brand" %>
+
+          <div class="span4">
+            <% flash.each do |name, msg| %>
+              <%= content_tag :div, msg, id: "flash_#{name}" %>
+            <% end %>
+          </div>
+
       <div style="float: right;">log in/out and sign up links will go here</div>
     </div>
   </div>
