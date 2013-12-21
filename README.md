@@ -5,6 +5,9 @@ Re-write the whole twetter project code from scratch
 
 ## Project name：Twetter 
 
+* Twetter is like Twitter
+* Twet is like Tweet
+
 ### About how-to
 
 	1. Rails new a project named Twetter
@@ -29,10 +32,10 @@ Re-write the whole twetter project code from scratch
 	c) add session controller
 	d) set a @current_user
 
-	6. Add Tweets data model
-	a) a User can post a Tweet
-	b) a User can see his Tweets
-	c) a User can see other User's Tweets
+	6. Add Twets data model
+	a) a User can post a Twet
+	b) a User can see his Twets
+	c) a User can see other User's Twets
 
 	7. Add Follow Model
 	a) a User can Follow other User

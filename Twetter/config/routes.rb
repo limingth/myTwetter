@@ -1,4 +1,6 @@
 Twetter::Application.routes.draw do
+  resources :twets
+
   get "sessions/new"
   resources :sessions
 #  get "users/new" 

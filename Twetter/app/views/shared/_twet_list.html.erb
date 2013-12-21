@@ -1,0 +1,18 @@
+<h1>All Twets informations list</h1>
+Total <%= @twets.count %> twets posted!
+
+<table width=80%>
+<hr>
+  <tr>
+    <td width=10%><h4>ID</td>
+    <td width=30%><h4>Twet</td>
+  </tr>
+
+  <% @twets.each do |u| %>
+  <tr>
+    <td><%= u.user_id %></td>
+    <td><%= u.content %></td>
+  </tr>
+  <% end %>
+
+</table>
