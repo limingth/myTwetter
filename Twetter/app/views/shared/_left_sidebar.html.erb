@@ -1,0 +1,46 @@
+    <div class="span3 siderbar">
+	<div class="col-md-4">
+	  <ul class="nav nav-pills nav-stacked well text-left">
+	    <li>
+	      <%= content_tag :strong, current_user.name %>
+	    </li>
+	    <li>
+	      <%= content_tag :small, '@'+current_user.username %>
+	      <br> (id: <%= current_user.id %> at <%= current_user.created_at %>)
+	    </li>
+	    <li>
+		      <table class="table table-bordered stats">
+			<tbody>
+			  <tr>
+			    <td>
+			      <%= content_tag :h4, current_user.id %>
+			      <%= content_tag :small, 'Twets', :class => "uppercase lighter" %>
+			      <a href="/twets/show">Twets</a>
+			    </td>
+			    <td>
+			      <%= content_tag :h4, current_user.username %>
+			      <%= content_tag :small, 'Following', :class => "uppercase lighter" %>
+			    </td>
+			    <td>
+			      <%= content_tag :h4, current_user.username %>
+			      <%= content_tag :small, 'Followers', :class => "uppercase lighter" %>
+			    </td>
+			</tbody>
+		      </table>
+	    </li>
+	    <li>
+		    <%= form_for (@twet || :twet), :url => twets_path,
+					 :method => :POST,
+					 :role => :form do |f| %>
+		      <div class="mar-top-15">
+			<%= content_tag :div do %>
+			  <%= f.text_area :content, :placeholder => "Compose new Twet...", :class => 'form-control', :height => "500" %>
+			<% end %>
+			<%= f.submit "Twet", :class => "btn btn-primary pull-right" %>
+		      </div>
+		    <% end %>
+	    </li>
+	</div>
+    </div>
+
+

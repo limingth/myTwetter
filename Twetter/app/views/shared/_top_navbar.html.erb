@@ -1,0 +1,20 @@
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "Twetter", root_path, :class => "brand" %>
+
+        <div class="span4">
+          <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, id: "flash_#{name}" %>
+          <% end %>
+        </div>
+
+	<div class="session-controls" align=right>
+	   <% if current_user %>
+              Logged in as <%= current_user.username %>.
+	      <div class="btn-group">
+		<%= link_to "Log Out", session_path("current"), method: 'delete', :class => 'btn btn-primary btn-mini' %>
+	      </div>
+           <% end %>	 
+	</div>
+     </div>
+  </div>

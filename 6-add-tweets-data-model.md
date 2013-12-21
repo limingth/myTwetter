@@ -413,106 +413,276 @@
 
 ![twets-user2](twets-user2.png)
 
-* git commit
+### git commit
+	limingth@gmail ~/Github/myTwetter/Twetter$ git status
+	# On branch master
+	# Changes not staged for commit:
+	#   (use "git add <file>..." to update what will be committed)
+	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#
+	#	modified:   ../6-add-tweets-data-model.md
+	#	modified:   ../README.md
+	#	modified:   app/models/user.rb
+	#	modified:   app/views/layouts/authed.html.erb
+	#	modified:   config/routes.rb
+	#	modified:   db/schema.rb
+	#
+	# Untracked files:
+	#   (use "git add <file>..." to include in what will be committed)
+	#
+	#	app/assets/javascripts/twets.js.coffee
+	#	app/assets/stylesheets/twets.css.scss
+	#	app/controllers/twets_controller.rb
+	#	app/helpers/twets_helper.rb
+	#	app/models/twet.rb
+	#	app/views/layouts/twets.html.erb
+	#	app/views/shared/_twet_list.html.erb
+	#	app/views/twets/
+	#	db/migrate/20131221173418_create_twets.rb
+	#	db/migrate/20131221183524_add_content_to_twets.rb
+	#	db/migrate/20131221183937_add_user_id_to_twets.rb
+	#	test/controllers/twets_controller_test.rb
+	#	test/fixtures/twets.yml
+	#	test/helpers/twets_helper_test.rb
+	#	test/models/twet_test.rb
+	#	../twets-list.png
+	#	../twets-user2.png
+	#	../twets-view-tobe.png
+	no changes added to commit (use "git add" and/or "git commit -a")
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add ..
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add .
+	limingth@gmail ~/Github/myTwetter/Twetter$ git commit -a -m "Add Twet model"
+	[master 8fdaaf2] Add Twet model
+	 24 files changed, 568 insertions(+), 7 deletions(-)
+	 create mode 100644 Twetter/app/assets/javascripts/twets.js.coffee
+	 create mode 100644 Twetter/app/assets/stylesheets/twets.css.scss
+	 create mode 100644 Twetter/app/controllers/twets_controller.rb
+	 create mode 100644 Twetter/app/helpers/twets_helper.rb
+	 create mode 100644 Twetter/app/models/twet.rb
+	 create mode 100644 Twetter/app/views/layouts/twets.html.erb
+	 create mode 100644 Twetter/app/views/shared/_twet_list.html.erb
+	 create mode 100644 Twetter/app/views/twets/index.html.erb
+	 create mode 100644 Twetter/db/migrate/20131221173418_create_twets.rb
+	 create mode 100644 Twetter/db/migrate/20131221183524_add_content_to_twets.rb
+	 create mode 100644 Twetter/db/migrate/20131221183937_add_user_id_to_twets.rb
+	 create mode 100644 Twetter/test/controllers/twets_controller_test.rb
+	 create mode 100644 Twetter/test/fixtures/twets.yml
+	 create mode 100644 Twetter/test/helpers/twets_helper_test.rb
+	 create mode 100644 Twetter/test/models/twet_test.rb
+	 create mode 100644 twets-list.png
+	 create mode 100644 twets-user2.png
+	 create mode 100644 twets-view-tobe.png
+	limingth@gmail ~/Github/myTwetter/Twetter$ git push
+	Counting objects: 71, done.
+	Delta compression using up to 2 threads.
+	Compressing objects: 100% (41/41), done.
+	Writing objects: 100% (45/45), 256.87 KiB | 0 bytes/s, done.
+	Total 45 (delta 15), reused 0 (delta 0)
+	To git@github.com:limingth/myTwetter.git
+	   05471dc..8fdaaf2  master -> master
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
 
+## Improve Twet layout view to show one's own twets
 
+### add a link to one's twets
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/layouts/twets.html.erb 
+	 47                       <table class="table table-bordered stats">
+	 48                         <tbody>
+	 49                           <tr>
+	 50                             <td>
+	 51                               <%= content_tag :h4, current_user.id %>
+	 52                               <%= content_tag :small, 'Twets', :class => "uppercase lighter" %>
+	 53                               <a href="/twets/index">Twets</a>
+	 54                             </td>
 
+### add show method to TwetsController
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/controllers/twets_controller.rb 
+	  1 class TwetsController < ApplicationController
+	  2   layout 'twets'
+	  3 
+	  4   def show
+	  5     @twets = current_user.all_twets
+	  6     redirect_to twets_path
+	  7   end
+	  8   
+	  9   def index
+	 10     @users = User.all
+	 11     #@twets = Twet.all
+	 12     @twets = current_user.all_twets
+	 13   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-	limingth@gmail ~/Github/myTwetter/Twetter$ cat db/migrate/20131221000002_create_twets.rb 
-	  1 class CreateTwets < ActiveRecord::Migration
-	  2   def change
-	  3     create_table :twets do |t|
-	  4       t.integer :user_id
-	  5       t.text :content
-	  6       
-	  7       t.timestamps
-	  8     end
-	  9   
-	 10     add_index :tweets, :user_id
-	 11   end
-	 12 end
-
-### change route for Twet post button
-	limingth@gmail ~/Github/myTwetter/Twetter$ vi config/routes.rb 
-	  1 Twetter::Application.routes.draw do
-	  2   get "sessions/new"
-	  3   resources :sessions
-	  4   resources :twets
-
-
-#### refresh web browser localhost:3000
-	Unknown action
-	The action 'create' could not be found for TwetsController
-
-
-### 
+### add all_twets to user
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/models/user.rb 
+	 11   def all_twets
+	 12     Twet.by_user_ids(id)
+	 13   end
+	 14 
 
 ### modify Twet model
 	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/models/twet.rb 
-	  1 class Twet < ActiveRecord::Base
-	  2 
-	  3   belongs_to :user
-	  4 
-	  5   validates :content, :presence => true, :length => { :minimum => 2, :maximum => 140 }
-	  6   validates :user, :presence => true
-	  7 
-	  8   def self.by_user_ids(*ids)
-	  9     where(:user_id => ids.flatten.compact.uniq).order('created_at DESC')
-	 10   end
-	 11 
-	 12 end
+	class Twet < ActiveRecord::Base
 
-### rake db:migrate
-	limingth@gmail ~/Github/myTwetter/Twetter$ rake db:migrate
-	==  AddContentToTwets: migrating ==============================================
-	-- add_column(:twets, :content, :text)
-	   -> 0.0135s
-	==  AddContentToTwets: migrated (0.0137s) =====================================
+	  belongs_to :user
 
-	limingth@gmail ~/Github/myTwetter/Twetter$ 
+	  validates :content, :presence => true, :length => { :minimum => 2, :maximum => 140 }
+	  validates :user, :presence => true
 
+	  # Gets all twets made by the users referenced by the ids passed, starting with the 
+	  # most recent twet made.
+	  #
+	  def self.by_user_ids(*ids)
+	    where(:user_id => ids.flatten.compact.uniq).order('created_at DESC')
+	  end 
 
+	end
 
-### rails generate migration AddContentToTwets content:text
-	limingth@gmail ~/Github/myTwetter/Twetter$ rails generate migration AddContentToTwets content:text
-	      invoke  active_record
-	      create    db/migrate/20131221005827_add_content_to_twets.rb
-	limingth@gmail ~/Github/myTwetter/Twetter$ 
+### change layout to _top_navbar, _left_sidebar, _right_sidebar
 
-### re-create db
-	limingth@gmail ~/Github/myTwetter/Twetter$ rm db/development.sqlite3 
-	limingth@gmail ~/Github/myTwetter/Twetter$ rake db:migrate
-	==  CreateUsers: migrating ====================================================
-	-- create_table(:users)
-	   -> 0.0036s
-	==  CreateUsers: migrated (0.0039s) ===========================================
+#### twets layout
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/layouts/twets.html.erb 
+	<!DOCTYPE html>
+	<html>
+	<head>
+	  <title>Twetter</title>
+	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
 
-	==  CreateTwets: migrating ====================================================
-	-- create_table(:twets)
-	   -> 0.0020s
-	-- add_index(:twets, :user_id)
-	   -> 0.0008s
-	==  CreateTwets: migrated (0.0031s) ===========================================
+	<div class="navbar navbar-fixed-top">
+	    <%= render :partial => 'shared/top_navbar' %>
+	</div>
 
-limingth@gmail ~/Github/myTwetter/Twetter$ 
+	<div class="container">
+	  <div class="row">
+	       <%= render :partial => 'shared/left_sidebar' %>
 
+	    <div class="span9">
+	       <%= render :partial => 'shared/twet_list' %>
+	    </div>
 
+	  </div>
+	</div>
 
+	</body>
+	</html>
 
+#### authed layout
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/layouts/authed.html.erb 
+	<!DOCTYPE html>
+	<html>
+	<head>
+	  <title>Twetter</title>
+	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
 
+	<div class="navbar navbar-fixed-top">
+	    <%= render :partial => 'shared/top_navbar' %>
+	</div>
+
+	<div class="container">
+	  <div class="row">
+	       <%= render :partial => 'shared/left_sidebar' %>
+
+	    <div class="span9">
+	       <%= render :partial => 'shared/user_list' %>
+	    </div>
+
+	  </div>
+	</div>
+
+	</body>
+	</html>
+
+#### top navbar
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/shared/_top_navbar.html.erb 
+	  <div class="navbar-inner">
+	    <div class="container">
+	      <%= link_to "Twetter", root_path, :class => "brand" %>
+
+	        <div class="span4">
+	          <% flash.each do |name, msg| %>
+	            <%= content_tag :div, msg, id: "flash_#{name}" %>
+	          <% end %>
+	        </div>
+
+	        <div class="session-controls" align=right>
+	           <% if current_user %>
+	              Logged in as <%= current_user.username %>. 
+	              <div class="btn-group">
+	                <%= link_to "Log Out", session_path("current"), method: 'delete', :class => 'btn btn-primary btn-mini' %>
+	              </div>
+	           <% end %>    
+	        </div>
+	     </div>
+	  </div>
+
+#### left sidebar
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/shared/_left_sidebar.html.erb 
+	    <div class="span3 siderbar">
+	        <div class="col-md-4">
+	          <ul class="nav nav-pills nav-stacked well text-left">
+	            <li>
+	              <%= content_tag :strong, current_user.name %>
+	            </li>
+	            <li>
+	              <%= content_tag :small, '@'+current_user.username %>
+	            </li>
+	            <li>
+	                      <table class="table table-bordered stats">
+	                        <tbody>
+	                          <tr>
+	                            <td>
+	                              <%= content_tag :h4, current_user.id %>
+	                              <%= content_tag :small, 'Twets', :class => "uppercase lighter" %>
+	                              <a href="/twets/show">Twets</a>
+	                            </td>
+	                            <td>
+	                              <%= content_tag :h4, current_user.username %>
+	                              <%= content_tag :small, 'Following', :class => "uppercase lighter" %>
+	                            </td>
+	                            <td>
+	                              <%= content_tag :h4, current_user.username %>
+	                              <%= content_tag :small, 'Followers', :class => "uppercase lighter" %>
+	                            </td>
+	                        </tbody>
+	                      </table>
+	            </li>
+	            <li>
+	                    <%= form_for (@twet || :twet), :url => twets_path,
+	                                         :method => :POST,
+	                                         :role => :form do |f| %>
+	                      <div class="mar-top-15">
+	                        <%= content_tag :div do %>
+	                          <%= f.text_area :content, :placeholder => "Compose new Twet...", :class => 'form-control', :height => "500" %>
+	                        <% end %>
+	                        <%= f.submit "Twet", :class => "btn btn-primary pull-right" %>
+	                      </div>
+	                    <% end %>
+	            </li>
+	        </div>
+	    </div>
+
+* refresh web browser
+
+		Now you can see http://localhost:3000/twets shows twet list, 
+		          while http://localhost:3000/users shows user list
+
+### modify left sidebar to test layout 
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/shared/_left_sidebar.html.erb 
+	  8               <%= content_tag :small, '@'+current_user.username %>
+	  9               <br> (id: <%= current_user.id %> at <%= current_user.created_at %>)
+	 10             </li>
+
+* refresh web browser
+
+		Now the left bar shows user id and create time, weather you login or signup. it works for both
+
+![relayout-app](relayout-app.png)
 
 
 

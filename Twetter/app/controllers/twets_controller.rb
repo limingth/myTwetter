@@ -1,9 +1,15 @@
 class TwetsController < ApplicationController
   layout 'twets'
 
+  def show
+    @twets = current_user.all_twets
+    redirect_to twets_path
+  end
+
   def index
     @users = User.all
-    @twets = Twet.all
+    #@twets = Twet.all
+    @twets = current_user.all_twets
   end
 
   def create
