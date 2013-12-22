@@ -228,7 +228,163 @@
 ![follow-noself](follow-noself.png)
 
 ### git commit
+	limingth@gmail ~/Github/myTwetter/Twetter$ git status
+	# On branch master
+	# Changes not staged for commit:
+	#   (use "git add <file>..." to update what will be committed)
+	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#
+	#	modified:   ../6-add-tweets-data-model.md
+	#	modified:   app/helpers/application_helper.rb
+	#	modified:   app/models/user.rb
+	#	modified:   app/views/shared/_left_sidebar.html.erb
+	#	modified:   app/views/shared/_user_list.html.erb
+	#	modified:   config/routes.rb
+	#	modified:   db/schema.rb
+	#
+	# Untracked files:
+	#   (use "git add <file>..." to include in what will be committed)
+	#
+	#	../7-add-follow-model.md
+	#	app/assets/javascripts/follows.js.coffee
+	#	app/assets/stylesheets/follows.css.scss
+	#	app/controllers/follows_controller.rb
+	#	app/helpers/follows_helper.rb
+	#	app/models/follow.rb
+	#	app/views/follows/
+	#	db/migrate/20131222161357_create_follows.rb
+	#	db/migrate/20131222162033_add_user_id_to_follows.rb
+	#	db/migrate/20131222162100_add_following_id_to_follows.rb
+	#	test/controllers/follows_controller_test.rb
+	#	test/fixtures/follows.yml
+	#	test/helpers/follows_helper_test.rb
+	#	test/models/follow_test.rb
+	#	../follow-button.png
+	#	../follow-noself.png
+	#	../follow-number.png
+	#	../follow-self.png
+	no changes added to commit (use "git add" and/or "git commit -a")
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add ../
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add .
+	limingth@gmail ~/Github/myTwetter/Twetter$ git status
+	# On branch master
+	# Changes to be committed:
+	#   (use "git reset HEAD <file>..." to unstage)
+	#
+	#	modified:   ../6-add-tweets-data-model.md
+	#	new file:   ../7-add-follow-model.md
+	#	new file:   app/assets/javascripts/follows.js.coffee
+	#	new file:   app/assets/stylesheets/follows.css.scss
+	#	new file:   app/controllers/follows_controller.rb
+	#	modified:   app/helpers/application_helper.rb
+	#	new file:   app/helpers/follows_helper.rb
+	#	new file:   app/models/follow.rb
+	#	modified:   app/models/user.rb
+	#	new file:   app/views/follows/index.html.erb
+	#	modified:   app/views/shared/_left_sidebar.html.erb
+	#	modified:   app/views/shared/_user_list.html.erb
+	#	modified:   config/routes.rb
+	#	new file:   db/migrate/20131222161357_create_follows.rb
+	#	new file:   db/migrate/20131222162033_add_user_id_to_follows.rb
+	#	new file:   db/migrate/20131222162100_add_following_id_to_follows.rb
+	#	modified:   db/schema.rb
+	#	new file:   test/controllers/follows_controller_test.rb
+	#	new file:   test/fixtures/follows.yml
+	#	new file:   test/helpers/follows_helper_test.rb
+	#	new file:   test/models/follow_test.rb
+	#	new file:   ../follow-button.png
+	#	new file:   ../follow-noself.png
+	#	new file:   ../follow-number.png
+	#	new file:   ../follow-self.png
+	#
+	limingth@gmail ~/Github/myTwetter/Twetter$ git commit -a -m "User can Follow other User"
+	[master 61a2ae4] User can Follow other User
+	 25 files changed, 404 insertions(+), 13 deletions(-)
+	 create mode 100644 7-add-follow-model.md
+	 create mode 100644 Twetter/app/assets/javascripts/follows.js.coffee
+	 create mode 100644 Twetter/app/assets/stylesheets/follows.css.scss
+	 create mode 100644 Twetter/app/controllers/follows_controller.rb
+	 create mode 100644 Twetter/app/helpers/follows_helper.rb
+	 create mode 100644 Twetter/app/models/follow.rb
+	 create mode 100644 Twetter/app/views/follows/index.html.erb
+	 create mode 100644 Twetter/db/migrate/20131222161357_create_follows.rb
+	 create mode 100644 Twetter/db/migrate/20131222162033_add_user_id_to_follows.rb
+	 create mode 100644 Twetter/db/migrate/20131222162100_add_following_id_to_follows.rb
+	 create mode 100644 Twetter/test/controllers/follows_controller_test.rb
+	 create mode 100644 Twetter/test/fixtures/follows.yml
+	 create mode 100644 Twetter/test/helpers/follows_helper_test.rb
+	 create mode 100644 Twetter/test/models/follow_test.rb
+	 create mode 100644 follow-button.png
+	 create mode 100644 follow-noself.png
+	 create mode 100644 follow-number.png
+	 create mode 100644 follow-self.png
+	limingth@gmail ~/Github/myTwetter/Twetter$ git push
+	Counting objects: 70, done.
+	Delta compression using up to 2 threads.
+	Compressing objects: 100% (41/41), done.
+	Writing objects: 100% (44/44), 406.45 KiB | 0 bytes/s, done.
+	Total 44 (delta 21), reused 0 (delta 0)
+	To git@github.com:limingth/myTwetter.git
+	   15fddfc..61a2ae4  master -> master
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
 
+## Add Following link and Follower link to left sidebar
+
+### add Following link
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/shared/_left_sidebar.html.erb 
+	 20                             <td>
+	 21                               <%= content_tag :h4, current_user.follows.count%>
+	 22                               <%= content_tag :small, 'Following', :class => "uppercase lighter" %>
+	 23                               <a href="/follows/show">Following</a>
+	 24                             </td>
+
+* refresh web browser and click the following link
+
+		Unknown action
+		The action 'show' could not be found for FollowsController
+
+### add show method to follows controller
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/controllers/follows_controller.rb 
+	  1 class FollowsController < ApplicationController
+	  2   layout 'authed'
+	  3 
+	  4   @click_following = 0
+	  5 
+	  6   def show
+	  7     @click_following = 1
+	  8     redirect_to :action => :index
+	  9   end
+	 10   
+	 11   def index
+	 12     @users = User.all
+	 13     if @click_following == 0
+	 14       @users = User.all 
+	 15     else
+	 16       @users.clear
+	 17       current_user.follows.each do |u|
+	 18               @users += User.where(:id => u.following_id)
+	 19       end     
+	 20     end
+	 21   end
+
+### add Show All Users link at left sidebar
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/shared/_left_sidebar.html.erb 
+	  4             <li>
+	  5               <%= content_tag :strong, current_user.name %>
+	  6             </li>
+	  7             <li>
+	  8               <%= content_tag :small, '@'+current_user.username %>
+	  9               <br> (id: <%= current_user.id %> at <%= current_user.created_at %>)
+	 10               <br> <a href="/users">Show All Users</a>
+	 11             </li>
+
+* refresh web browser and click Show All Users link
+![show-all-users](show-all-users.png)
+
+* refresh web browser and click the following link
+![show-following](show-following.png)
+
+### git commit
 
 * click the unfollow button
 

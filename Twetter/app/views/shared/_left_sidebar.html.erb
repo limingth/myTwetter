@@ -7,6 +7,7 @@
 	    <li>
 	      <%= content_tag :small, '@'+current_user.username %>
 	      <br> (id: <%= current_user.id %> at <%= current_user.created_at %>)
+	      <br> <a href="/users">Show All Users</a>
 	    </li>
 	    <li>
 		      <table class="table table-bordered stats">
@@ -20,6 +21,7 @@
 			    <td>
 			      <%= content_tag :h4, current_user.follows.count%>
 			      <%= content_tag :small, 'Following', :class => "uppercase lighter" %>
+			      <a href="/follows/show">Following</a>
 			    </td>
 			    <td>
 			      <%= content_tag :h4, Follow.where(:following_id => current_user.id).count %>

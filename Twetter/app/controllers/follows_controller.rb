@@ -1,8 +1,23 @@
 class FollowsController < ApplicationController
   layout 'authed'
+ 
+  @click_following = 0
+ 
+  def show
+    @click_following = 1
+    redirect_to :action => :index
+  end
 
   def index
-    @users = User.all_except(current_user)
+    @users = User.all
+    if @click_following == 0
+      @users = User.all
+    else
+      @users.clear
+      current_user.follows.each do |u|
+	      @users += User.where(:id => u.following_id) 
+      end
+    end
   end
 
   def create
@@ -19,5 +34,6 @@ class FollowsController < ApplicationController
   def follow_params
     params.require(:follow).permit(:following_id)
   end
+
 
 end
