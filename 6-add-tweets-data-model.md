@@ -684,12 +684,41 @@
 
 ![relayout-app](relayout-app.png)
 
+### git commit
+limingth@gmail ~/Github/myTwetter/Twetter$ git add ..
+limingth@gmail ~/Github/myTwetter/Twetter$ git add .
+limingth@gmail ~/Github/myTwetter/Twetter$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   ../6-add-tweets-data-model.md
+#	modified:   app/controllers/twets_controller.rb
+#	modified:   app/models/twet.rb
+#	modified:   app/views/layouts/authed.html.erb
+#	modified:   app/views/layouts/twets.html.erb
+#	renamed:    app/views/layouts/authed.html.erb -> app/views/shared/_left_sidebar.html.erb
+#	new file:   app/views/shared/_top_navbar.html.erb
+#	new file:   ../relayout-app.png
+#
+limingth@gmail ~/Github/myTwetter/Twetter$ git commit -a -m "Improve Twet layout view to show one's own twets"
+[master 15fddfc] Improve Twet layout view to show one's own twets
+ 8 files changed, 336 insertions(+), 290 deletions(-)
+ rewrite Twetter/app/views/layouts/authed.html.erb (79%)
+ rewrite Twetter/app/views/layouts/twets.html.erb (80%)
+ rename Twetter/app/views/{layouts/authed.html.erb => shared/_left_sidebar.html.erb} (54%)
+ create mode 100644 Twetter/app/views/shared/_top_navbar.html.erb
+ create mode 100644 relayout-app.png
+limingth@gmail ~/Github/myTwetter/Twetter$ git push
+Counting objects: 30, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (17/17), done.
+Writing objects: 100% (17/17), 105.58 KiB | 0 bytes/s, done.
+Total 17 (delta 9), reused 0 (delta 0)
+To git@github.com:limingth/myTwetter.git
+   8fdaaf2..15fddfc  master -> master
+limingth@gmail ~/Github/myTwetter/Twetter$ 
 
-
-
-
-
-
-
-
+## Done!
+see next step [Add Follow Model](7-add-follow-model.md)
 

@@ -15,7 +15,7 @@ Total <%= @users.count %> users signed up!
     <td><%= u.id %></td>
     <td><%= u.name %></td>
     <td><%= u.username %></td>
-    <td>Follow</td>
+    <td><%= follow_link(u) %></td>
   </tr>
   <% end %>
 
