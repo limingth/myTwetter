@@ -2,7 +2,7 @@
 ## Project name：Twetter 
 Re-write the whole twetter project code from scratch
 
-### terms we use
+### Terms we use
 * Twetter is like Twitter
 * Twet is like Tweet
 
@@ -65,22 +65,25 @@ Re-write the whole twetter project code from scratch
 	- [Add Unfollow functionality](https://github.com/limingth/myTwetter/commit/c4d73309aaad386e77d9a05d3f21fef8177882b7)
 	- [Change UI for user list and twet list](https://github.com/limingth/myTwetter/commit/209616e5dea674f0392ba35a531f36d4126abb82)
 
+##
+### the next steps are to be done in future
+
 #### 9. Develop a new branch named profile
 * refer to https://github.com/limingth/myRoR/blob/master/8-twetter-project.md
-	- a) add mention linker to @username
-	- b) add profile page for everyuser like http://localhost:3000/username
+	- add mention linker to @username
+	- add profile page for everyuser like http://localhost:3000/username
 
 #### 10. Develop a new branch named retwet
 * refer to https://github.com/limingth/myRoR/blob/master/9-twetter-retwet-feature.md
-	- a) a User can ReTwet a User's Tweet who he has followed
-	- b) a User can see which Tweet he has ReTwetted
-	- c) a User can see all Tweets which been twetted and retwetted by one he is following
+	- a User can ReTwet a User's Tweet who he has followed
+	- a User can see which Tweet he has ReTwetted
+	- a User can see all Tweets which been twetted and retwetted by one he is following
 
-#### 11. Develop a new branch named retwet gravatar
+#### 11. Develop a new branch named gravatar
 * no refer now
-	- a) add user pictures to his left sidebar view if his email associated with Gravatar
+	- add user pictures to his left sidebar view if his email associated with Gravatar
 
-#### 12. merge all branches to complete branch and host on heroku
+#### 12. Merge all branches to complete branch and host it on heroku
 * refer to https://github.com/limingth/myRoR/blob/master/7-hosting-on-heroku.md
 
 
