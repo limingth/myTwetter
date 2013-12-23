@@ -1,7 +1,7 @@
 class FollowsController < ApplicationController
   layout 'authed'
  
-  @@click = "Users"
+  @@click = "users"
 
   def followers
     @users.clear
