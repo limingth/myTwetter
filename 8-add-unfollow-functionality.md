@@ -204,3 +204,38 @@
 ![new-twet-list](new-twet-list.png)
 
 ### git commit 
+	limingth@gmail ~/Github/myTwetter/Twetter$ git status
+	# On branch master
+	# Changes not staged for commit:
+	#   (use "git add <file>..." to update what will be committed)
+	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#
+	#	modified:   ../8-add-unfollow-functionality.md
+	#	modified:   app/controllers/follows_controller.rb
+	#	modified:   app/views/shared/_left_sidebar.html.erb
+	#	modified:   app/views/shared/_twet_list.html.erb
+	#	modified:   app/views/shared/_user_list.html.erb
+	#
+	# Untracked files:
+	#   (use "git add <file>..." to include in what will be committed)
+	#
+	#	../new-twet-list.png
+	#	../new-user-list.png
+	no changes added to commit (use "git add" and/or "git commit -a")
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add ..
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add .
+	limingth@gmail ~/Github/myTwetter/Twetter$ git commit -a -m "Change UI for user list and twet list"
+	[master 209616e] Change UI for user list and twet list
+	 7 files changed, 164 insertions(+), 25 deletions(-)
+	 rewrite Twetter/app/views/shared/_twet_list.html.erb (71%)
+	 create mode 100644 new-twet-list.png
+	 create mode 100644 new-user-list.png
+	limingth@gmail ~/Github/myTwetter/Twetter$ git push
+	Counting objects: 24, done.
+	Delta compression using up to 2 threads.
+	Compressing objects: 100% (14/14), done.
+	Writing objects: 100% (14/14), 260.25 KiB | 0 bytes/s, done.
+	Total 14 (delta 8), reused 0 (delta 0)
+	To git@github.com:limingth/myTwetter.git
+	   c4d7330..209616e  master -> master
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
