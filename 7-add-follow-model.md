@@ -493,12 +493,47 @@
 ![click-followers](click-followers.png)
 
 ### git commit
+	limingth@gmail ~/Github/myTwetter/Twetter$ git status
+	# On branch master
+	# Changes not staged for commit:
+	#   (use "git add <file>..." to update what will be committed)
+	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#
+	#	modified:   ../7-add-follow-model.md
+	#	modified:   app/controllers/follows_controller.rb
+	#	modified:   app/views/shared/_left_sidebar.html.erb
+	#	modified:   config/routes.rb
+	#
+	# Untracked files:
+	#   (use "git add <file>..." to include in what will be committed)
+	#
+	#	../click-followers.png
+	#	../click-following.png
+	no changes added to commit (use "git add" and/or "git commit -a")
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add ..
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add .
+	limingth@gmail ~/Github/myTwetter/Twetter$ git commit -a -m "Add follower link to left sidebar"
+	[master b523a04] Add follower link to left sidebar
+	 6 files changed, 90 insertions(+), 8 deletions(-)
+	 create mode 100644 click-followers.png
+	 create mode 100644 click-following.png
+	limingth@gmail ~/Github/myTwetter/Twetter$ git push
+	Counting objects: 25, done.
+	Delta compression using up to 2 threads.
+	Compressing objects: 100% (14/14), done.
+	Writing objects: 100% (14/14), 178.36 KiB | 0 bytes/s, done.
+	Total 14 (delta 12), reused 0 (delta 0)
+	To git@github.com:limingth/myTwetter.git
+	   d1f25a9..b523a04  master -> master
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
+
+## Done!
 
 * click the unfollow button
 
 		Unknown action
 		The action 'destroy' could not be found for FollowsController
 
-
+see next step [Add Unfollow functionality](8-add-unfollow-functionality.md)
 
 

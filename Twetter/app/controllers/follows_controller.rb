@@ -1,7 +1,7 @@
 class FollowsController < ApplicationController
   layout 'authed'
  
-  @@click = ""
+  @@click = "Users"
 
   def followers
     @users.clear
@@ -9,17 +9,14 @@ class FollowsController < ApplicationController
   end
 
   def show
-    if params[:id] == "following"
-      @@click = "following"
-    end
-    if params[:id] == "followers"
-      @@click = "followers"
-    end
+    @@click = params[:id]
     redirect_to :action => :index
   end
 
   def index
     @users = User.all
+    print @@click
+    @who = @@click.capitalize
 
     if @@click == "following"
       @users.clear
@@ -45,6 +42,19 @@ class FollowsController < ApplicationController
       flash[:error] = "Your attempt to follow was unsuccessful"
     end
     redirect_to :action => :index
+  end
+
+  def destroy
+    if resource and resource.destroy
+      flash[:success] = "You are no longer following @#{resource.following.username}"
+    else
+      flash[:error] = "Your attempt to unfollow was not successful"
+    end
+    redirect_to :action => :index
+  end
+
+  def resource
+    @resource ||= current_user.follows.where(:id => params[:id]).first
   end
 
   def follow_params
