@@ -431,6 +431,69 @@
 
 ![following-twets](following-twets.png)
 
+## Add follower link to left sidebar
+
+### change links as following and followers
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/views/shared/_left_sidebar.html.erb 
+	 21                             <td>
+	 22                               <%= content_tag :h4, current_user.follows.count%>
+	 23                               <%= content_tag :small, 'Following', :class => "uppercase lighter" %>
+	 24                               <a href="/follows/following">Following</a>
+	 25                             </td>
+	 26                             <td>
+	 27                               <%= content_tag :h4, Follow.where(:following_id => current_user.id).count %>
+	 28                               <%= content_tag :small, 'Followers', :class => "uppercase lighter" %>
+	 29                               <a href="/follows/followers">Followers</a>
+	 30                             </td>
+
+### change method in follows controllers
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/controllers/follows_controller.rb 
+	  1 class FollowsController < ApplicationController
+	  2   layout 'authed'
+	  3 
+	  4   @@click = ""
+	  5 
+	  6   def followers
+	  7     @users.clear
+	  8     redirect_to :action => :index
+	  9   end
+	 10   
+	 11   def show
+	 12     if params[:id] == "following"
+	 13       @@click = "following"
+	 14     end
+	 15     if params[:id] == "followers"
+	 16       @@click = "followers"
+	 17     end
+	 18     redirect_to :action => :index
+	 19   end
+	 20   
+	 21   def index
+	 22     @users = User.all
+	 23     
+	 24     if @@click == "following"
+	 25       @users.clear
+	 26       current_user.follows.each do |u|
+	 27         @users += User.where(:id => u.following_id)
+	 28       end     
+	 29     end
+	 30     
+	 31     if @@click == "followers"
+	 32       @users.clear
+	 33       Follow.where(:following_id => current_user.id).each do |u|
+	 34         @users += User.where(:id => u.user_id) 
+	 35       end     
+	 36     end
+	 37   end
+
+* refresh web browser and click the following link 
+![click-following](click-following.png)
+
+* refresh web browser and click the followers link 
+![click-followers](click-followers.png)
+
+### git commit
+
 * click the unfollow button
 
 		Unknown action

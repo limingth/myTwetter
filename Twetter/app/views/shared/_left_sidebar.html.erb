@@ -21,11 +21,12 @@
 			    <td>
 			      <%= content_tag :h4, current_user.follows.count%>
 			      <%= content_tag :small, 'Following', :class => "uppercase lighter" %>
-			      <a href="/follows/show">Following</a>
+			      <a href="/follows/following">Following</a>
 			    </td>
 			    <td>
 			      <%= content_tag :h4, Follow.where(:following_id => current_user.id).count %>
 			      <%= content_tag :small, 'Followers', :class => "uppercase lighter" %>
+			      <a href="/follows/followers">Followers</a>
 			    </td>
 			</tbody>
 		      </table>

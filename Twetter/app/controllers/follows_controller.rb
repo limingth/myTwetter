@@ -1,21 +1,37 @@
 class FollowsController < ApplicationController
   layout 'authed'
  
-  @click_following = 0
- 
+  @@click = ""
+
+  def followers
+    @users.clear
+    redirect_to :action => :index
+  end
+
   def show
-    @click_following = 1
+    if params[:id] == "following"
+      @@click = "following"
+    end
+    if params[:id] == "followers"
+      @@click = "followers"
+    end
     redirect_to :action => :index
   end
 
   def index
     @users = User.all
-    if @click_following == 0
-      @users = User.all
-    else
+
+    if @@click == "following"
       @users.clear
       current_user.follows.each do |u|
-	      @users += User.where(:id => u.following_id) 
+        @users += User.where(:id => u.following_id) 
+      end
+    end
+
+    if @@click == "followers"
+      @users.clear
+      Follow.where(:following_id => current_user.id).each do |u|
+        @users += User.where(:id => u.user_id) 
       end
     end
   end

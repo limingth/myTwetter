@@ -3,6 +3,8 @@ Twetter::Application.routes.draw do
 
   resources :twets
 
+  get 'follows/followers' => 'follows#followers'
+
   get "sessions/new"
   resources :sessions
 #  get "users/new" 
