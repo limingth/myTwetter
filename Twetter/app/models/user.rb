@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
   has_many :follows
 
   def all_twets
-    Twet.by_user_ids(id)
+    #Twet.by_user_ids(id)
+    Twet.by_user_ids(id, *follows.map(&:following_id))
   end
 
   def self.all_except(user)

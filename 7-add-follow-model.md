@@ -385,6 +385,51 @@
 ![show-following](show-following.png)
 
 ### git commit
+	limingth@gmail ~/Github/myTwetter/Twetter$ git status
+	# On branch master
+	# Changes not staged for commit:
+	#   (use "git add <file>..." to update what will be committed)
+	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#
+	#	modified:   ../7-add-follow-model.md
+	#	modified:   app/controllers/follows_controller.rb
+	#	modified:   app/views/shared/_left_sidebar.html.erb
+	#
+	# Untracked files:
+	#   (use "git add <file>..." to include in what will be committed)
+	#
+	#	../show-all-users.png
+	#	../show-following.png
+	no changes added to commit (use "git add" and/or "git commit -a")
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add ..
+	limingth@gmail ~/Github/myTwetter/Twetter$ git add .
+	limingth@gmail ~/Github/myTwetter/Twetter$ git commit -a -m "Add Following link to left sidebar"
+	[master 8824a4d] Add Following link to left sidebar
+	 5 files changed, 175 insertions(+), 1 deletion(-)
+	 create mode 100644 show-all-users.png
+	 create mode 100644 show-following.png
+	limingth@gmail ~/Github/myTwetter/Twetter$ git push
+	Counting objects: 21, done.
+	Delta compression using up to 2 threads.
+	Compressing objects: 100% (12/12), done.
+	Writing objects: 100% (12/12), 239.20 KiB | 0 bytes/s, done.
+	Total 12 (delta 9), reused 0 (delta 0)
+	To git@github.com:limingth/myTwetter.git
+	   61a2ae4..8824a4d  master -> master
+	limingth@gmail ~/Github/myTwetter/Twetter$ 
+
+## Add following user's twets to one's twets list
+
+### modify user model's all_twets method
+	limingth@gmail ~/Github/myTwetter/Twetter$ vi app/models/user.rb 
+	 12   def all_twets
+	 13     #Twet.by_user_ids(id)
+	 14     Twet.by_user_ids(id, *follows.map(&:following_id))
+	 15   end
+
+* refresh web browser and you can see user 1 follows user 2 & user 4, so he can see from his twets
+
+![following-twets](following-twets.png)
 
 * click the unfollow button
 
