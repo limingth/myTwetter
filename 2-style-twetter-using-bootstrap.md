@@ -1,4 +1,3 @@
-
 # Style Twetter using bootstrap
 
 ## Configure Gemfile
@@ -195,4 +194,4 @@ div class="navbar navbar-fixed-top"
 
 
 ## Done!
-see next step [Use SQLite3 and Create the User Model](3-setup-database-and-user-model.md.md)
+see next step [Use SQLite3 and Create the User Model](3-setup-database-and-user-model.md)
