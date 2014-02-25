@@ -23,7 +23,7 @@ Re-write the whole twetter project code from scratch
 * refer to <https://github.com/limingth/myRoR/blob/master/4-style-wikiful-with-twitter-bootstrap.md>
 
 #### 3. Use SQLite3 as database and Create the User Model
-* see hands-on steps: [Use SQLite3 and Create the User Model](3-setup-database-and-user-model.md.md)
+* see hands-on steps: [Use SQLite3 and Create the User Model](3-setup-database-and-user-model.md)
 * checkout commits:
 	- [Use SQLite3 as database and Create the User Model](https://github.com/limingth/myTwetter/commit/36336469b5c8f5a4151819660f9c9adf049ac5cb)
 * refer to <https://github.com/limingth/myRoR/blob/master/2-work-with-psql.md>
